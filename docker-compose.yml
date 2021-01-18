@@ -1,0 +1,8 @@
+version: "3.0"
+services:
+  springbootwebapp:
+    build: "springbootwebapp"
+  cucumbertests:
+    build: "cucumbertests"
+    depends_on:
+      - "springbootwebapp"
