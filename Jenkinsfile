@@ -8,7 +8,7 @@ pipeline {
             steps {
                 checkout scm
                 sh '''
-                  docker-compose up 
+                  docker-compose up cucumbertests 
                 '''
             }
         }
