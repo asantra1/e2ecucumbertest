@@ -8,5 +8,8 @@ RUN apt-get update && apt-get install -y \
 RUN mvn -version
 RUN mkdir -p $HOME/SpringbootWebapp
 WORKDIR $HOME/SpringbootWebapp
-COPY . .
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src/ src/
+RUN mvn package
 ENTRYPOINT ["java", "-jar", "target/SpringbootWebapp-1.0-SNAPSHOT.jar"]
