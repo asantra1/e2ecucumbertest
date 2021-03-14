@@ -1,14 +1,11 @@
 pipeline {
-    environment {
-        PATH = "$PATH:/usr/local/bin"
-    }
     agent {
-        docker { image 'node:14-alpine' }
+        docker { image 'jpetazzo/dind' }
     }
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'docker info'
             }
         }
     }
