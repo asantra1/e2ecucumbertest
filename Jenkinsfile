@@ -4,29 +4,41 @@ pipeline {
       yaml """\
         apiVersion: v1
         kind: Pod
-        metadata:
-          labels:
-            k8-name: cucumber
         spec:
+          volumes:
+          - name: docker-socket
+            emptyDir: {}
           containers:
-          - name: dind
-            image: jpetazzo/dind:latest
+          - name: r 
+            image: docker:19.03.1
             command:
-            - cat
-            tty: true
-        """.stripIndent()
+            - sleep
+            args:
+            - 99d
+            volumeMounts:
+            - name: docker-socket
+              mountPath: /var/run
+          - name: docker-daemon
+            image: docker:19.03.1-dind
+            securityContext:
+              privileged: true
+            volumeMounts:
+            - name: docker-socket
+              mountPath: /var/run
+                """.stripIndent()
     }
   }
   stages {
     stage('Docker Build') {
       steps {
-        container('dind') {
+        container('docker') {
+          checkout scm
+
           sh '''
-             
+             docker info
           '''
         }
       }
     }
   }
 }
-
