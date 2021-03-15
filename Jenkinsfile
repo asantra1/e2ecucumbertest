@@ -9,7 +9,7 @@ pipeline {
           - name: docker-socket
             emptyDir: {}
           containers:
-          - name: r 
+          - name: docker 
             image: docker:19.03.1
             command:
             - sleep
