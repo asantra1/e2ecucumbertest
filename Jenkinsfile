@@ -14,7 +14,7 @@ pipeline {
             command:
             - sleep
             args:
-            - 99d
+            - 100d
             volumeMounts:
             - name: docker-socket
               mountPath: /var/run
